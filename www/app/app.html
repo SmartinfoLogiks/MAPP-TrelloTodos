@@ -1,0 +1,202 @@
+<!-- Here you can define the shell for your app -->
+<script src="app/js/script.js"></script>
+<script src="app/js/json.js"></script>
+
+<div id='topbar'>
+	<header>
+		<div id="mySidenav" class="sideNav">
+			<div class="searchBox">
+				<a class="sidebarHeading" href="#"></a>
+				<a href="javascript:void(0)" onclick="closeNav()" class="closebtn"><i class="fa fa-times" aria-hidden="true"></i></a>
+				<div class="form-group">
+					<img src="app/media/images/default-avatar.png" id="userpic" height="42" width="42">
+					<p id="fullname" class="fullName"></p>
+					<p id="email"></p>
+
+				</div>
+			</div>
+			<ul>
+				<div id="listBoard"></div>
+			</ul>
+			<div class="logoBox">
+				<img src="app/media/images/logo.png">
+			</div>
+
+		</div>
+
+		<div class="topNav">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<span class="menuIcon" onclick="openNav()"><i class="fa fa-bars pull-left" aria-hidden="true"></i></span>
+						<a class="navbar-brand" id="headerTextss" href="#">All Tasks</a>
+						<!--<div class="dropdown">
+								<a onclick='logoutDirect()'><i class="fa fa-power-off pull-right " aria-hidden="true" ></i>
+                                </a>
+						
+						</div>-->
+						<div class="animatedSearch">
+							<i class="fa fa-search toggleSearchicon" aria-hidden="true"></i>
+							<input type="text" class="form-control toggleInput" name="search" id="myInput" onkeyup="myFunction()" placeholder="Search for Task..">
+							<i class="fa fa-times closeIcon" aria-hidden="true"></i>
+						</div>
+					</div>
+
+				</div>
+			</nav>
+		</div>
+	</header>
+	<div class="bannerMain">
+		<h3 id="headerTexts" class="head">Header</h3>
+		<p id="lastDate"></p>
+	</div>
+
+	<div class="sortingMain">
+		<div class="sortingHead">
+			<p id="sortMethodText">Sort By <i class="fa fa-chevron-right" aria-hidden="true"></i></p>
+		</div>
+		<div class="sortingBody">
+			<ul>
+				<li>
+					<div class="custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="alphabetical" name="tasksort" value="alphaAz">
+						<label class="custom-control-label" for="alphabetical">Alphabetical (A - Z)</label>
+					</div>
+				</li>
+				<li>
+					<div class="custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="alphabeticalza" name="tasksort" value="alphaZa">
+						<label class="custom-control-label" for="alphabeticalza">Alphabetical (Z - A)</label>
+					</div>
+				</li>
+				<li>
+					<div class="custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="dueDate" name="tasksort" value="dueDate">
+						<label class="custom-control-label" for="dueDate">Due date</label>
+					</div>
+				</li>
+				<!--	<li>
+					<div class="custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="newest" name="tasksort" value="newFirst">
+						<label class="custom-control-label" for="newest">Newest first</label>
+					</div>
+				</li>
+				<li>
+					<div class="custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="oldest" name="tasksort" value="oldFirst">
+						<label class="custom-control-label" for="oldest">Oldest first</label>
+					</div>
+				</li>-->
+			</ul>
+			<!--	<div class="sortingButtons">
+				<button class="btn">Done</button>
+			</div>-->
+
+		</div>
+
+
+	</div>
+</div>
+
+<div id='mainContainer'>
+</div>
+
+<script id="board-list" type="text/x-handlebars-template">
+	<li><a href="#home/all" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i> All Cards</a>{{#each Data }}
+		<li><a href="#home/{{id}}" class="pageLink" id="{{id}}"><i class="fa fa-file-text-o" aria-hidden="true"></i> {{name}}</a>
+
+		</li>
+		{{/each}}
+		<li class="logoutBtn"><a onclick='logoutDirect()'><i class="fa fa-power-off" aria-hidden="true" ></i>Logout</a> </li>
+</script>
+<script id="card-list" type="text/x-handlebars-template">
+	{{#each Data }}
+	<li>
+
+
+		<a class="pageLink card-link collapsed" data-toggle="collapse" href="#collapse{{id}}">
+			{{truncateString name}}
+			<br>
+			<font size="2" class="taskName">{{bname}} > {{colname}}</font></a>
+
+		<div class="flexBox">
+			<div class="smallImgblock">
+				<div class="labelBlock">
+					{{{color labels}}}
+				</div>
+
+			</div>
+			<div class="icondesBlock">
+				<div class="iconSingleblock">
+					<i class="fa fa-comment-o" aria-hidden="true"></i>
+					<span class="coutBlock">{{comments badges}}</span>
+				</div>
+				<div class="iconSingleblock">
+					<i class="fa fa-paperclip" aria-hidden="true"></i>
+					<span class="coutBlock">{{attachments badges}}</span>
+				</div>
+				<div class="iconSingleblock">
+					<i class="fa fa-check-square-o" aria-hidden="true"></i>
+					<span>{{checkItemsChecked badges}}/{{checkItems badges}}</span>
+				</div>
+			</div>
+
+		</div>
+		{{#if due}}<font size="2" class="dueDate">{{datesubstr due}}</font>{{else}}<font size="2">{{datesubstr due}}</font> {{/if}}
+		<div id="collapse{{id}}" class="collapse" data-parent="#accordion">
+			<div class="card-body">
+				{{#if desc}}
+				<p style="font-size:14px;" class="taskDes">{{desc}}</p>
+				{{else}}
+				<p style="font-size:14px;" class="taskDes2"></p>
+				{{/if}}
+				<p id="taskText" class="taskText"></p>
+				<a href="{{url}}" class="taskLinks" style="font-size:14px;">view more</a>
+			</div>
+		</div>
+	</li>
+
+	{{/each}}
+</script>
+
+<script>
+	$(".toggleSearchicon").click(function() {
+		$("body").addClass("open");
+
+	});
+	$(".closeIcon").click(function() {
+		$("body").removeClass("open");
+
+	});
+
+	function myFunction() {
+		var input, filter, ul, li, a, i, txtValue, d, dtxtValue;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		ul = document.getElementById("myUL");
+		li = ul.getElementsByTagName("li");
+		for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			d = li[i].getElementsByTagName("div")[8];
+			txtValue = a.textContent || a.innerText;
+			dtxtValue = d.textContent || d.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1 || dtxtValue.toUpperCase().indexOf(filter) > -1) {
+				li[i].style.display = "";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		$(".sortingHead").click(function() {
+			$(".sortingBody").slideToggle("slow");
+			$(this).toggleClass("open")
+		});
+		$(".sortingButtons .btn").click(function() {
+			$(".sortingBody").slideUp("slow");
+		});
+	});
+</script>
+<!--<a href="{{url}}" class="taskLinks" style="font-size:14px;"><i class="fa fa-link" aria-hidden="true"></i>{{url}}</a>-->

@@ -1,0 +1,10 @@
+platforms/
+plugins/
+dist/
+node_modules/
+.gradle/
+.thumbs
+.DS_Store
+todos.txt
+
+package-lock.json

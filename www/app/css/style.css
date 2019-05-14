@@ -1,0 +1,1588 @@
+body {
+	/*font-family: "Lato", sans-serif;*/
+	
+	background-color: #f5f5f5;
+}
+/*   -----sidebar-------*/
+
+.sideNav {
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	border-right: 1px solid #ddd;
+	left: -100%;
+	background-color: #fff;
+	overflow-x: hidden;
+	transition: 0.5s;
+	z-index: 99;
+}
+
+.sideNav ul {
+	list-style: none;
+	padding-left: 0;
+	/*min-height: 80%;
+	min-height: calc(100% - 171px);*/
+}
+
+.sideNav ul li a {
+	padding: 10px 15px;
+	text-decoration: none;
+	font-size: 17px;
+	color: #333;
+	display: block;
+	border-top: 1px solid #eee;
+	transition: 0.3s;
+}
+
+.sideNav ul li a .fa {
+	margin-right: 10px;
+	color: #333;
+}
+
+.sideNav ul li a:hover,
+.sideNav ul li a:focus,
+.sideNav ul li a:active {
+	color: #555;
+}
+
+.sideNav .closebtn {
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	font-size: 22px;
+	margin-left: 50px;
+	opacity: 0.5;
+	color: #461c4e;
+	z-index: 999999999;
+}
+
+.sideNav .searchBox {
+	padding: 10px 20px;
+	position: sticky;
+	right: 0;
+	top: 0;
+	left: 0;
+	background: #285fa5;
+}
+
+.sideNav .form-group {
+	position: relative;
+	margin-top: 8px;
+}
+
+.sideNav .form-group .form-control {
+	border-radius: 0;
+	padding-right: 30px;
+	border-color: #a1a1a1;
+}
+
+.sideNav .form-group .fa {
+	position: absolute;
+	right: 9px;
+	top: 9px;
+	font-size: 16px;
+	color: #999191;
+}
+
+.sideNav .sidebarHeading {
+	font-size: 20px;
+	color: #333;
+}
+
+.sideNav .addNew {
+	position: sticky;
+	display: flex;
+	bottom: 0;
+	padding: 15px;
+	font-size: 16px;
+	color: #333;
+	background: #fff
+}
+
+.sideNav .addNew span {
+	font-size: 30px;
+	margin-right: 10px;
+	line-height: 16px;
+}
+/*   -----topbar-------*/
+
+.topNav .navbar {
+	border: 0;
+	padding: 0 15px;
+	background-color: transparent;
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	z-index: 9;
+	min-height: 50px;
+}
+
+.topNav .navbar .navbar-header .menuIcon .fa {
+	font-size: 23px;
+	margin-top: 9px;
+}
+
+.topNav .navbar .navbar-header .fa {
+	color: #fff;
+	margin-top: 10px;
+	font-size: 23px;
+}
+
+.topNav .navbar .navbar-header .navbar-brand {
+	color: #ffffff;
+	font-size: 21px;
+	opacity: 0;
+}
+
+.topNav .dropdown .dropdown-menu {
+	right: 0;
+	left: auto;
+	top: 39px;
+	padding: 5px 3px;
+	min-width: 88px;
+}
+
+.darkHeader .topNav .navbar {
+	background-color: #285fa5;
+}
+
+.darkHeader .topNav .navbar .navbar-header .navbar-brand {
+	opacity: 1;
+	padding-top: 7px;
+}
+/*   -----banner-------*/
+
+.bannerMain {
+	height: 170px;
+	background: url(../media/images/background2.jpg);
+	background-size: cover;
+}
+
+.bannerMain h3 {
+	margin: 0;
+	padding-top: 115px;
+	color: #fff;
+	padding-left: 32px;
+	font-size: 20px;
+}
+
+.darkHeader .bannerMain h3 {
+	opacity: 0;
+}
+/*   -----content-area-------*/
+
+.contentArea {
+	float: left;
+	width: 100%;
+}
+
+.contentArea .contentBox {
+	float: left;
+	width: 100%;
+}
+
+.contentArea .contentBox ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.contentArea .contentBox ul li {
+	padding: 15px 15px;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
+	margin-top: 4px;
+	position: relative;
+	display: flow-root;
+}
+
+.contentArea .contentBox ul li a {
+	color: #333;
+	font-size: 17px;
+	display: block;
+}
+
+.contentArea .contentBox ul li a .fa.todoIcon {
+	margin-right: 7px;
+	font-size: 18px;
+	top: 20px;
+	position: absolute;
+	left: 10px;
+}
+
+.contentArea .contentBox ul li a .fa {
+	font-size: 14px;
+	top: -2px;
+	position: relative;
+}
+/*--------------add-todo----------*/
+
+.addTodo {}
+
+.addTodo span {
+	position: fixed;
+	bottom: 15px;
+	right: 9px;
+	font-size: 37px;
+	background: #285fa5;
+	width: 38px;
+	height: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #d0d0d0;
+	border-radius: 100%;
+}
+
+.addTodo .overlay {
+	height: 0%;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.9);
+	overflow-y: hidden;
+	transition: 0.5s;
+}
+
+.addTodo .overlay-content {
+	position: relative;
+	top: 25%;
+	width: 100%;
+	text-align: center;
+	padding: 15px 10px;
+}
+
+.addTodo .overlay-content .form-group {
+	position: relative;
+}
+
+.addTodo .overlay-content .form-group .form-control {
+	border-radius: 0;
+	padding-right: 20px;
+}
+
+.addTodo .overlay-content .form-group .fa {
+	position: absolute;
+	top: 7px;
+	right: 11px;
+	font-size: 20px;
+	color: #898585;
+}
+
+.addTodo .overlay a {
+	padding: 8px;
+	text-decoration: none;
+	font-size: 36px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.addTodo .overlay a:hover,
+.addTodo .overlay a:focus {
+	color: #f1f1f1;
+}
+
+.addTodo .overlay .closebtn {
+	position: absolute;
+	top: 7px;
+	right: 0;
+	font-size: 31px;
+	line-height: 0;
+}
+/*---------colorBox--------------*/
+
+.colorBox {
+	display: none;
+}
+
+.colorBox ul {
+	list-style: none;
+}
+
+.colorBox ul li {
+	float: left;
+}
+
+.colorBox ul li a {
+	width: 30px;
+	height: 30px;
+	display: block;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+
+.orangeColor {
+	background: #ffa62b;
+}
+
+.limeColor {
+	background: #51e898;
+}
+
+.redColor {
+	background: #eb5a46;
+}
+
+.darkblueColor {
+	background: #0079bf;
+}
+
+.skyblueColor {
+	background: #00c2e0;
+}
+
+.greenColor {
+	background: #61bd4f;
+}
+
+.yellowColor {
+	background: #c3ad03;
+}
+
+.pinkColor {
+	background: #ff78cb;
+}
+
+.greyColor {
+	background: #355263;
+}
+
+.topNav .dropdown {
+	float: right;
+}
+
+.topNav .navbar-header {
+	width: 100%;
+}
+
+.topNav .dropdown-toggle::after {
+	display: none;
+}
+
+.topNav .dropdown-menu>li>a {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+}
+
+.loginSection {
+	background: #fff;
+	height: 100%;
+}
+
+.loginMain {
+	float: left;
+	width: 100%;
+	/* padding-top: 20%; */
+	
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 20px;
+}
+
+.loginMain .loginBlock {
+	float: left;
+	width: 100%;
+	margin-top: -50px;
+}
+
+.loginMain .loginBlock .iconBox {
+	width: 100%;
+	float: left;
+	text-align: center;
+}
+
+.loginMain .loginBlock .iconBox img {
+	width: 29vh;
+}
+
+.loginMain .loginBlock .iconBox h3 {
+	font-size: 25px;
+}
+
+.loginMain .loginBlock .iconBox p {
+	font-size: 16px;
+}
+
+.loginMain .loginBlock .formBox {
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.loginMain .loginBlock .formBox span {
+	color: #dc4343;
+	font-size: 13px;
+	display: block;
+	margin-bottom: 4px;
+}
+
+.loginMain .loginBlock .formBox .form-group {
+	position: relative;
+}
+
+.loginMain .loginBlock .formBox .form-group .fa {
+	position: absolute;
+	right: 6px;
+	top: 0px;
+	font-size: 28px;
+	color: #6f6c6c;
+	background: #fff;
+}
+
+.form-control {
+	border-radius: 0;
+	border-color: #a2a2a2;
+	color: #222;
+	height: 40px;
+}
+
+.form-group label {
+	margin-bottom: 2px;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.form-control {
+	border-radius: 0;
+	/* border-color: #a2a2a2; */
+	
+	color: #222;
+	border: 0;
+	border-bottom: 1px solid #f3f1f1;
+	padding-left: 0;
+	padding-top: 0;
+	height: auto;
+	font-size: 17px;
+	box-shadow: none;
+}
+
+.backgroundColor {
+	background: #256cb8;
+	color: #fff;
+}
+
+.fixedButton {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	border: 0;
+	height: 45px;
+	border-radius: 0;
+	color: #fff;
+	font-size: 18px;
+}
+
+.tokenMain {
+	/*background: #353535;*/
+}
+
+.tokenMain .modal-dialog {
+	margin-top: 42%;
+}
+
+.tokenMain .modal-content {
+	background-color: #424242;
+	color: #fff;
+}
+
+.tokenMain .modal-header .close {
+	color: #fff;
+}
+
+.tokenMain a {
+	font-size: 16px;
+	padding: 5px;
+}
+
+.tokenMain .modal-header {
+	padding: 6px 15px;
+	border-color: #545455;
+}
+
+.tokenMain .modal-header h4 {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.tokenMain .modal-footer {
+	/*border: 0;*/
+	
+	padding: 7px 15px;
+	border-color: #545455;
+}
+
+.tokenMain .modal-footer a {
+	font-weight: 600;
+	color: #40a5ff;
+}
+
+.tokenMain .modal-footer a:first-child {
+	/*color: #ec1414;*/
+}
+
+.tokenMain .modal-body {
+	font-size: 15px;
+	padding: 10px 15px;
+	line-height: 26px;
+}
+
+.login-body #topbar {
+	display: none;
+}
+
+.form-control:focus {
+	box-shadow: none;
+}
+
+.dueDate {
+	position: absolute;
+	/* bottom: 7px; */
+	
+	right: 41px;
+	top: 2px;
+	color: #28af47;
+}
+
+.taskName {
+	float: left;
+	width: 65%;
+	/*padding-left: 23px;*/
+}
+
+.card-body .taskDes {
+	margin-bottom: 0;
+	font-size: 16px !important;
+}
+
+.card-body .taskDes:first-letter {
+	text-transform: uppercase;
+}
+
+.card-body .taskText:empty {
+	display: none;
+}
+
+.card-body .taskDes2:empty {
+	display: none;
+}
+
+.contentBox .card-body {
+	background: #ffffff;
+	border-bottom: 0;
+	padding: 10px 15px;
+}
+
+.sideNav .searchBox p {
+	margin-bottom: 0;
+	color: #fff;
+	font-size: 14px;
+}
+
+.sideNav .searchBox img {
+	width: 60px;
+	height: 60px;
+	padding: 2px;
+	background: #fff;
+	border-radius: 100%;
+}
+
+.sideNav .searchBox .fa {
+	color: #fff;
+}
+
+.sideNav .searchBox .fullName {
+	font-size: 18px;
+	margin-top: 5px;
+}
+
+.taskLinks {
+	color: #5a3bba;
+	font-size: 14px !important;
+	display: block;
+	text-align: right;
+}
+
+.taskLinks .fa {
+	margin-right: 7px;
+}
+
+.login-body {
+	background-color: #ffffff;
+}
+
+a.pageLink.card-link {
+	padding-left: 23px;
+	padding-right: 20px;
+}
+/* --------responsive-----*/
+
+@media (min-width: 768px) {
+	.topNav .navbar-header {
+		float: none;
+	}
+	.sideNav {
+		width: 250px;
+	}
+	.topNav .navbar {
+		left: 250px;
+	}
+	.topNav .navbar .navbar-header .menuIcon {
+		display: none;
+	}
+	.contentArea {
+		padding-left: 250px;
+	}
+	.bannerMain {
+		padding-left: 250px;
+	}
+	.sideNav .closebtn {
+		display: none;
+	}
+}
+
+.btnBlock {
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.btnBlock .btn {
+	width: 45%;
+	border-radius: 0;
+}
+
+.btnBlock .singleBtn {
+	width: 100%;
+}
+
+.openKeyboard .loginMain {
+	display: block;
+	padding-top: 20px;
+}
+
+.openKeyboard .loginMain .loginBlock {
+	margin-top: 0;
+}
+
+body {
+	/*font-family: "Lato", sans-serif;*/
+	
+	background-color: #f5f5f5;
+}
+/*   -----sidebar-------*/
+
+.sideNav {
+	height: 100%;
+	width: 284px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	border-right: 1px solid #ddd;
+	left: -100%;
+	background-color: #fff;
+	overflow-x: hidden;
+	transition: 0.5s;
+	z-index: 99;
+}
+
+.sideNav ul {
+	list-style: none;
+	padding-left: 0;
+	height: 80%;
+	height: calc(100% - 201px);
+	overflow: auto;
+}
+
+.sideNav ul li a {
+	padding: 10px 15px;
+	text-decoration: none;
+	font-size: 17px;
+	color: #333;
+	display: block;
+	border-top: 1px solid #eee;
+	transition: 0.3s;
+}
+
+.sideNav ul li a .fa {
+	margin-right: 10px;
+	color: #333;
+}
+
+.sideNav ul li a:hover,
+.sideNav ul li a:focus,
+.sideNav ul li a:active {
+	color: #555;
+}
+
+.sideNav .closebtn {
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	font-size: 22px;
+	margin-left: 50px;
+	opacity: 0.5;
+	color: #461c4e;
+	z-index: 999999999;
+}
+
+.sideNav .searchBox {
+	padding: 10px 20px;
+	position: sticky;
+	right: 0;
+	top: 0;
+	left: 0;
+	background-image: linear-gradient(to right, #cd6583, #C07D47);
+}
+
+.sideNav .form-group {
+	position: relative;
+	margin-top: 8px;
+}
+
+.sideNav .form-group .form-control {
+	border-radius: 0;
+	padding-right: 30px;
+	border-color: #a1a1a1;
+}
+
+.sideNav .form-group .fa {
+	position: absolute;
+	right: 9px;
+	top: 9px;
+	font-size: 16px;
+	color: #999191;
+}
+
+.sideNav .sidebarHeading {
+	font-size: 20px;
+	color: #333;
+}
+
+.sideNav .addNew {
+	position: sticky;
+	display: flex;
+	bottom: 0;
+	padding: 15px;
+	font-size: 16px;
+	color: #333;
+	background: #fff
+}
+
+.sideNav .addNew span {
+	font-size: 30px;
+	margin-right: 10px;
+	line-height: 16px;
+}
+/*   -----topbar-------*/
+
+.topNav .navbar {
+	border: 0;
+	padding: 0 15px;
+	background-color: transparent;
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	z-index: 9;
+	min-height: 50px;
+}
+
+.topNav .navbar .navbar-header .menuIcon .fa {
+	font-size: 23px;
+	margin-top: 9px;
+}
+
+.topNav .navbar .navbar-header .fa {
+	color: #fff;
+	margin-top: 10px;
+	font-size: 23px;
+}
+
+.topNav .navbar .navbar-header .navbar-brand {
+	color: #ffffff;
+	font-size: 21px;
+	opacity: 0;
+}
+
+.topNav .dropdown .dropdown-menu {
+	right: 0;
+	left: auto;
+	top: 39px;
+	padding: 5px 3px;
+	min-width: 88px;
+}
+
+.darkHeader .topNav .navbar {
+	/*	background-color: #285fa5;*/
+	
+	background-image: linear-gradient(to right, #cd6583, #C07D47);
+}
+
+.darkHeader .topNav .navbar .navbar-header .navbar-brand {
+	opacity: 1;
+	padding-top: 7px;
+}
+/*   -----banner-------*/
+
+.bannerMain {
+	height: 170px;
+	background: url(../media/images/background2.jpg);
+	background-size: cover;
+}
+
+.bannerMain h3 {
+	margin: 0;
+	padding-top: 115px;
+	color: #fff;
+	padding-left: 32px;
+	font-size: 20px;
+}
+
+.darkHeader .bannerMain h3 {
+	opacity: 0;
+}
+/*   -----content-area-------*/
+
+.contentArea {
+	float: left;
+	width: 100%;
+}
+
+.contentArea .contentBox {
+	float: left;
+	width: 100%;
+}
+
+.contentArea .contentBox ul {
+	list-style: none;
+	padding-left: 0;
+	word-break: break-all;
+}
+
+.contentArea .contentBox ul li {
+	padding: 0px 15px;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
+	margin-top: 4px;
+	position: relative;
+	display: flow-root;
+}
+
+.contentArea .contentBox ul li a {
+	color: #333;
+	font-size: 17px;
+	display: block;
+	line-height: 21px;
+}
+
+.contentArea .contentBox ul li a .fa.todoIcon {
+	margin-right: 7px;
+	font-size: 18px;
+	top: 8px;
+	position: absolute;
+	left: 10px;
+}
+
+.contentArea .contentBox ul li a .fa {
+	font-size: 14px;
+	top: 4px;
+	position: absolute;
+	right: 13px;
+}
+/*--------------add-todo----------*/
+
+.addTodo {}
+
+.addTodo span {
+	position: fixed;
+	bottom: 15px;
+	right: 9px;
+	font-size: 37px;
+	background: #285fa5;
+	width: 38px;
+	height: 38px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #d0d0d0;
+	border-radius: 100%;
+}
+
+.addTodo .overlay {
+	height: 0%;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.9);
+	overflow-y: hidden;
+	transition: 0.5s;
+}
+
+.addTodo .overlay-content {
+	position: relative;
+	top: 25%;
+	width: 100%;
+	text-align: center;
+	padding: 15px 10px;
+}
+
+.addTodo .overlay-content .form-group {
+	position: relative;
+}
+
+.addTodo .overlay-content .form-group .form-control {
+	border-radius: 0;
+	padding-right: 20px;
+}
+
+.addTodo .overlay-content .form-group .fa {
+	position: absolute;
+	top: 7px;
+	right: 11px;
+	font-size: 20px;
+	color: #898585;
+}
+
+.addTodo .overlay a {
+	padding: 8px;
+	text-decoration: none;
+	font-size: 36px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.addTodo .overlay a:hover,
+.addTodo .overlay a:focus {
+	color: #f1f1f1;
+}
+
+.addTodo .overlay .closebtn {
+	position: absolute;
+	top: 7px;
+	right: 0;
+	font-size: 31px;
+	line-height: 0;
+}
+/*---------colorBox--------------*/
+
+.colorBox {
+	display: none;
+}
+
+.colorBox ul {
+	list-style: none;
+}
+
+.colorBox ul li {
+	float: left;
+}
+
+.colorBox ul li a {
+	width: 30px;
+	height: 30px;
+	display: block;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+
+.orangeColor {
+	background: #e09514;
+}
+
+.redColor {
+	background: #e04014;
+}
+
+.blueColor {
+	background: #1485e0;
+}
+
+.greenColor {
+	background: #14e07f;
+}
+
+.topNav .dropdown {
+	float: right;
+}
+
+.topNav .navbar-header {
+	width: 100%;
+}
+
+.topNav .dropdown-toggle::after {
+	display: none;
+}
+
+.topNav .dropdown-menu>li>a {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+}
+
+.loginSection {
+	background: #fff;
+	height: 100%;
+}
+
+.loginMain {
+	float: left;
+	width: 100%;
+	/* padding-top: 20%; */
+	
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 20px;
+}
+
+.loginMain .loginBlock {
+	float: left;
+	width: 100%;
+	margin-top: -50px;
+}
+
+.loginMain .loginBlock .iconBox {
+	width: 100%;
+	float: left;
+	text-align: center;
+}
+
+.loginMain .loginBlock .iconBox img {
+	width: 29vh;
+}
+
+.loginMain .loginBlock .iconBox h3 {
+	font-size: 25px;
+}
+
+.loginMain .loginBlock .iconBox p {
+	font-size: 16px;
+}
+
+.loginMain .loginBlock .formBox {
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.loginMain .loginBlock .formBox span {
+	color: #dc4343;
+	font-size: 13px;
+	display: block;
+	margin-bottom: 4px;
+}
+
+.loginMain .loginBlock .formBox .form-group {
+	position: relative;
+}
+
+.loginMain .loginBlock .formBox .form-group .fa {
+	position: absolute;
+	right: 6px;
+	top: 0px;
+	font-size: 28px;
+	color: #6f6c6c;
+	background: #fff;
+}
+
+.form-control {
+	border-radius: 0;
+	border-color: #a2a2a2;
+	color: #222;
+	height: 40px;
+}
+
+.form-group label {
+	margin-bottom: 2px;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.form-control {
+	border-radius: 0;
+	/* border-color: #a2a2a2; */
+	
+	color: #222;
+	border: 0;
+	border-bottom: 1px solid #f3f1f1;
+	padding-left: 0;
+	padding-top: 0;
+	height: auto;
+	font-size: 17px;
+	box-shadow: none;
+}
+
+.backgroundColor {
+	background: #256cb8;
+	color: #fff;
+}
+
+.gradientColor {
+	background-image: linear-gradient(to right, #cd6583, #C07D47);
+	color: #fff;
+}
+
+.fixedButton {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	border: 0;
+	height: 45px;
+	border-radius: 0;
+	color: #fff;
+	font-size: 18px;
+}
+
+.tokenMain {
+	/*background: #353535;*/
+}
+
+.tokenMain .modal-dialog {
+	margin-top: 42%;
+}
+
+.tokenMain .modal-content {
+	background-color: #424242;
+	color: #fff;
+}
+
+.tokenMain .modal-header .close {
+	color: #fff;
+}
+
+.tokenMain a {
+	font-size: 16px;
+	padding: 5px;
+}
+
+.tokenMain .modal-header {
+	padding: 6px 15px;
+	border-color: #545455;
+}
+
+.tokenMain .modal-header h4 {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.tokenMain .modal-footer {
+	/*border: 0;*/
+	
+	padding: 7px 15px;
+	border-color: #545455;
+}
+
+.tokenMain .modal-footer a {
+	font-weight: 600;
+	color: #40a5ff;
+}
+
+.tokenMain .modal-footer a:first-child {
+	/*color: #ec1414;*/
+}
+
+.tokenMain .modal-body {
+	font-size: 15px;
+	padding: 10px 15px;
+	line-height: 26px;
+}
+
+.login-body #topbar {
+	display: none;
+}
+
+.form-control:focus {
+	box-shadow: none;
+}
+
+.taskName {
+	float: left;
+	width: 100%;
+	margin-bottom: 7px;
+}
+
+.card-body .taskDes {
+	margin-bottom: 0;
+	font-size: 16px !important;
+}
+
+.card-body .taskDes:first-letter {
+	text-transform: uppercase;
+}
+
+.card-body .taskText:empty {
+	display: none;
+}
+
+.card-body .taskDes2:empty {
+	display: none;
+}
+
+.contentBox .card-body {
+	background: #ffffff;
+	border-bottom: 0;
+	padding: 4px 0px;
+	border-top: 1px solid #eee;
+}
+
+.sideNav .searchBox p {
+	margin-bottom: 0;
+	color: #fff;
+	font-size: 14px;
+}
+
+.sideNav .searchBox img {
+	width: 60px;
+	height: 60px;
+	padding: 2px;
+	background: #fff;
+	border-radius: 100%;
+}
+
+.sideNav .searchBox .fa {
+	color: #fff;
+}
+
+.sideNav .searchBox .fullName {
+	font-size: 18px;
+	margin-top: 5px;
+}
+
+.taskLinks {
+	color: #5a3bba;
+	font-size: 14px !important;
+	display: block;
+	text-align: right;
+}
+
+.taskLinks .fa {
+	margin-right: 7px;
+}
+
+.login-body {
+	background-color: #ffffff;
+}
+
+a.pageLink.card-link {
+	padding-left: 0px;
+	padding-right: 130px;
+}
+/* --------responsive-----*/
+
+@media (min-width: 768px) {
+	.topNav .navbar-header {
+		float: none;
+	}
+	.sideNav {
+		width: 250px;
+	}
+	.topNav .navbar {
+		left: 250px;
+	}
+	.topNav .navbar .navbar-header .menuIcon {
+		display: none;
+	}
+	.contentArea {
+		padding-left: 250px;
+	}
+	.bannerMain {
+		padding-left: 250px;
+	}
+	.sideNav .closebtn {
+		display: none;
+	}
+}
+
+.btnBlock {
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.btnBlock .btn {
+	width: 45%;
+	border-radius: 0;
+}
+
+.btnBlock .singleBtn {
+	width: 100%;
+}
+
+.openKeyboard .loginMain {
+	display: block;
+	padding-top: 20px;
+}
+
+.openKeyboard .loginMain .loginBlock {
+	margin-top: 0;
+}
+
+.lavenderColor {
+	background: #c377e0;
+}
+
+.smallImgblock {
+	flex: 6;
+}
+
+.icondesBlock {
+	flex: 5;
+	justify-content: flex-end;
+	/* width: 100%; */
+	
+	display: flex;
+}
+
+.smallImgblock img {
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.icondesBlock .iconSingleblock {
+	float: left;
+	/* width: 31%; */
+	/* text-align: right; */
+	
+	font-size: 14px;
+	margin-left: 10px;
+}
+
+.flexBox {
+	display: flex;
+	align-items: center;
+	margin-bottom: 3px;
+	margin-top: 11px;
+	width: 100%;
+}
+
+.labelBlock {
+	margin-bottom: 0px;
+	width: 100%;
+}
+
+.labelBlock span {
+	width: 56px;
+	height: 14px;
+	border-radius: 20px;
+	margin-right: 5px;
+	display: inline-block;
+	margin-bottom: 7px;
+	float: left;
+	font-size: 10px;
+	padding: 2px 10px;
+	color: #fff;
+	line-height: 10px;
+	text-align: center;
+	word-break: initial;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.logoBox {
+	position: absolute;
+	bottom: 28px;
+	transform: rotate(-8deg);
+	right: 0;
+	left: 0;
+	filter: opacity(0.2);
+	padding-left: 53px;
+	z-index: -1;
+}
+
+.logoBox img {
+	width: 155px;
+}
+/*------sorting css------ */
+
+.sortingMain {
+	float: left;
+	width: 100%;
+	background: #fff;
+}
+
+.sortingMain .sortingHead {
+	padding: 10px 15px;
+	border-bottom: 1px solid #ddd;
+}
+
+.sortingMain .sortingHead p {
+	font-weight: 600;
+	margin: 0;
+	font-size: 13px;
+	letter-spacing: 1px;
+}
+
+.sortingMain .sortingHead .fa {
+	float: right;
+	margin-top: 5px;
+	color: #434242;
+	font-size: 12px;
+}
+
+.sortingMain .sortingHead.open .fa {
+	transform: rotate(90deg);
+}
+
+.sortingMain .sortingBody {
+	display: none;
+	padding: 4px 10px 0px 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.sortingMain .sortingBody ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+}
+
+.sortingMain .custom-control-label::before,
+.sortingMain .custom-control-label::after {
+	right: 5px;
+	left: auto;
+	top: 7px;
+}
+
+.sortingMain .custom-control-input:checked~.custom-control-label::before {
+	border-color: #ef5567;
+	background-color: #ef5567;
+}
+
+.sortingMain .custom-control-input:focus~.custom-control-label::before {
+	box-shadow: none;
+}
+
+.sortingMain .custom-control {
+	padding-left: 0;
+}
+
+.sortingMain .custom-control-label {
+	border-bottom: 1px solid #eee;
+	padding: 6px 7px;
+	width: 100%;
+	font-weight: 600;
+	font-size: 13px;
+	letter-spacing: 1px;
+}
+
+.sortingButtons {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.sortingButtons .btn {
+	background: #ef5567;
+	padding: 0px 10px;
+	border-radius: 0;
+	width: 28%;
+	font-size: 12px;
+	color: #ffffff;
+	border-radius: 20px;
+}
+
+.sortingButtons .btn:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.logoutBtn {
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	width: 283px;
+}
+
+.logoutBtn a,
+.logoutBtn .fa {
+	color: #f00 !important;
+}
+/*------------------new css---*/
+
+.animatedSearch {
+	float: right;
+	margin-right: 16px;
+	/*position: relative;*/
+}
+
+.animatedSearch .toggleInput {
+	display: none;
+	position: fixed;
+	width: 100%;
+	top: 4px;
+	left: 0px;
+	padding: 10px;
+	height: 41px;
+	border-radius: 0
+}
+
+body.open .animatedSearch .toggleInput {
+	display: block;
+}
+
+.toggleSearchicon {}
+
+.closeIcon {
+	display: none;
+	position: absolute;
+	top: -6px;
+	z-index: 99999999;
+	color: #060606 !important;
+	height: 34px;
+	right: 9px;
+	width: 34px;
+	padding-top: 11px;
+	font-size: 17px !important;
+	text-align: center;
+	opacity: 0.2;
+}
+
+body.open .animatedSearch .closeIcon {
+	display: block;
+}
+
+body.open .bannerMain {
+	background: linear-gradient(to right, #cd6583, #C07D47);
+	overflow: hidden;
+	left: 0;
+	right: 0;
+	z-index: 999;
+}
+
+.animatedSearch .toggleInput {}

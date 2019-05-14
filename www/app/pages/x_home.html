@@ -1,0 +1,256 @@
+<div class="contentArea">
+
+	<div class="contentBox">
+		<ul id="myUL">
+			<!--<li><a href=""><i class="fa fa-circle-thin todoIcon" aria-hidden="true"></i>Travelling to USA <i class="fa fa-chevron-right pull-right" aria-hidden="true"></i></a></li>
+			-->
+			<div id="accordion">
+				<p id="nodata" class="d-none" style="text-align:center;padding:15px;">No Task On Your Board</p>
+				<div id="loader"></div>
+				<div id="listcard"></div>
+			</div>
+		</ul>
+		<div class="addTodo">
+			<div id="myNav" class="overlay">
+				<a href="javascript:void(0)" class="closebtn" onclick="closBottom()">&times;</a>
+				<div class="overlay-content">
+					<div class="form-group">
+
+						<input type="text" class="form-control" id="cardname" name="cardname" placeholder="Add a Todo">
+						<i class="fa fa-plus" aria-hidden="true" id="addCard" name="addCard"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="colorBox">
+		<ul>
+			<li>
+				<a href="" class="orangeColor"></a>
+			</li>
+			<li>
+				<a href="" class="redColor"></a>
+			</li>
+			<li>
+				<a href="" class="blueColor"></a>
+			</li>
+			<li>
+				<a href="" class="greenColor"></a>
+			</li>
+		</ul>
+	</div>
+</div>
+<script>
+	showLoader("#loader");
+	var finalarr = [];
+	var cardTemplate = Handlebars.compile($("#card-list").html());
+
+	$(function() {
+		if (boardIDArr != null) {
+			loadTrelloCardData()
+		}
+	});
+
+
+	function loadTrelloCardData() {
+
+		hashArr = window.location.hash.split("/");
+		if (hashArr == null || hashArr.length <= 1) hashArr[1] = "all";
+
+		pageID = hashArr[1];
+
+		if (boardIDArr != null) {
+			if (pageID == "all") {
+				$("#headerTexts").text("All Tasks");
+				$("#headerTextss").text("All Tasks");
+				listAllData();
+			} else {
+				boardName = boardNameArr[boardIDArr.indexOf(pageID)];
+				$("#headerTexts").text(boardName);
+				$("#headerTextss").text(boardName);
+				listCardData(pageID);
+			}
+		} else {
+			$("#headerTexts").text("All Tasks");
+		}
+	}
+
+	/*	function listCardData(boardID) {
+			showLoader("#loader");
+			//$('#listcard').html("");
+			var key = appConfig.TRELLOAPIKEY;
+			var token = getUserSettings("USERKEY-TOKEN");
+			$.ajax({
+				url: "https://api.trello.com/1/boards/" + boardID + "/cards/visible?key=" + key + "&token=" + token,
+				success: function(result) {
+					allcardarr = {
+						Data: result
+					};
+					$.each(allcardarr.Data, function(a, b) {
+						if (boardNameArr[boardIDArr.indexOf(b.idBoard)] != null) {
+							allcardarr.Data[a].bname = boardNameArr[boardIDArr.indexOf(b.idBoard)];
+						} else {
+							allcardarr.Data[a].bname = "";
+						}
+					});
+
+					var theCompiledHtml = cardTemplate(allcardarr);
+
+					$('#listcard').html(theCompiledHtml);
+					if (result == null || result == "") {
+						$("#nodata").removeClass('d-none');
+					}
+					hideLoader("#loader");
+				}
+			});
+		}*/
+
+	function listCardData(boardID) {
+		showLoader("#loader");
+		var key = appConfig.TRELLOAPIKEY;
+		var token = getUserSettings("USERKEY-TOKEN");
+		$.ajax({
+			url: "https://api.trello.com/1/boards/" + boardID + "/lists?cards=open&card_fields=all&filter=open&fields=all&key=" + key + "&token=" + token,
+			success: function(result) {
+				allcardarr = {
+					Data: result
+				};
+
+				$.each(allcardarr.Data, function(a, b) {
+					$.each(allcardarr.Data[a].cards, function(k, v) {
+						allcardarr.Data[a].cards[k].colname = allcardarr.Data[a].name;
+						if (boardNameArr[boardIDArr.indexOf(b.idBoard)] != null) {
+							allcardarr.Data[a].cards[k].bname = boardNameArr[boardIDArr.indexOf(b.idBoard)];
+						} else {
+							allcardarr.Data[a].cards[k].bname = "";
+						}
+					});
+				});
+
+				allcardarr.Data.map(function(value, index) {
+					value['cards'].map(function(value1, index1) {
+						finalarr.push(value1);
+					})
+				})
+
+				final = {
+					Data: finalarr
+				};
+
+				var theCompiledHtml = cardTemplate(final);
+
+				$('#listcard').html(theCompiledHtml);
+				if (finalarr == null || finalarr == "") {
+					$("#nodata").removeClass('d-none');
+				}
+				hideLoader("#loader");
+			}
+		});
+	}
+
+	function listAllData() {
+		showLoader("#loader");
+		//$('#listcard').html("");
+		for (i = 0; i < boardIDArr.length; i++) {
+			var key = appConfig.TRELLOAPIKEY;
+			var token = getUserSettings("USERKEY-TOKEN");
+			$.ajax({
+				url: "https://api.trello.com/1/boards/" + boardIDArr[i] + "/lists?cards=open&card_fields=all&filter=open&fields=all&key=" + key + "&token=" + token,
+				success: function(result) {
+					allcardarr = {
+						Data: result
+					};
+					$.each(allcardarr.Data, function(a, b) {
+						$.each(allcardarr.Data[a].cards, function(k, v) {
+							allcardarr.Data[a].cards[k].colname = allcardarr.Data[a].name;
+							if (boardNameArr[boardIDArr.indexOf(b.idBoard)] != null) {
+								allcardarr.Data[a].cards[k].bname = boardNameArr[boardIDArr.indexOf(b.idBoard)];
+							} else {
+								allcardarr.Data[a].cards[k].bname = "";
+							}
+						});
+					});
+
+					allcardarr.Data.map(function(value, index) {
+						value['cards'].map(function(value1, index1) {
+							finalarr.push(value1);
+						})
+					})
+
+					final = {
+						Data: finalarr
+					};
+
+					var theCompiledHtml = cardTemplate(final);
+
+					$('#listcard').html(theCompiledHtml);
+					hideLoader("#loader");
+				}
+			});
+
+		}
+	}
+
+	function SortByNameAsc(x, y) {
+		return ((x.name.toLowerCase() == y.name.toLowerCase()) ? 0 : ((x.name.toLowerCase() > y.name.toLowerCase()) ? 1 : -1));
+	}
+
+	function SortByNameDesc(x, y) {
+		return ((x.name.toLowerCase() == y.name.toLowerCase()) ? 0 : ((x.name.toLowerCase() > y.name.toLowerCase()) ? -1 : 1));
+	}
+
+	function SortByDueDate(x, y) {
+		var dateA = new Date(x.due),
+			dateB = new Date(y.due)
+		return dateB - dateA;
+	}
+
+	$('input[type=radio][name=tasksort]').change(function() {
+		$(".sortingBody").slideUp("slow");
+		if (this.value == 'alphaAz') {
+			console.log("alphaAz");
+			final.Data.sort(SortByNameAsc);
+			var theCompiledHtml = cardTemplate(final);
+			$('#listcard').html(theCompiledHtml);
+		} else if (this.value == 'alphaZa') {
+			console.log("alphaZa");
+			final.Data.sort(SortByNameDesc);
+			var theCompiledHtml = cardTemplate(final);
+			$('#listcard').html(theCompiledHtml);
+		} else if (this.value == 'dueDate') {
+			console.log("dueDate");
+			final.Data.sort(SortByDueDate);
+			var theCompiledHtml = cardTemplate(final);
+			$('#listcard').html(theCompiledHtml);
+		}
+	});
+	/*	function listAllData() {
+			showLoader("#loader");
+			//$('#listcard').html("");
+			for (i = 0; i < boardIDArr.length; i++) {
+				var key = appConfig.TRELLOAPIKEY;
+				var token = getUserSettings("USERKEY-TOKEN");
+				$.ajax({
+					url: "https://api.trello.com/1/boards/" + boardIDArr[i] + "/cards/visible?key=" + key + "&token=" + token,
+					success: function(result) {
+						allcardarr = {
+							Data: result
+						};
+						$.each(allcardarr.Data, function(a, b) {
+							if (boardNameArr[boardIDArr.indexOf(b.idBoard)] != null) {
+								allcardarr.Data[a].bname = boardNameArr[boardIDArr.indexOf(b.idBoard)];
+							} else {
+								allcardarr.Data[a].bname = "";
+							}
+						});
+
+						var theCompiledHtml = cardTemplate(allcardarr);
+
+						$('#listcard').append(theCompiledHtml);
+						hideLoader("#loader");
+					}
+				});
+
+			}
+		}*/
+</script>
