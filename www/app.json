@@ -1,7 +1,7 @@
 {
 	"APPTITLE": "Trello Todos",
 	"DEBUG": true,
-	"appstatus": "development",
+	"appstatus": "production",
 	"CHECKONLINE": true,
 	"PAGEHOME": "#home",
 	"PAGEERROR": "#error",

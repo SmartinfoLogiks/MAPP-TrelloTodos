@@ -102,6 +102,8 @@
 </div>
 
 <script id="board-list" type="text/x-handlebars-template">
+	<li><a href="#home/myday" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i>My Day</a></li>
+	<li><a href="#home/me" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i>Assign To Me</a></li>
 	<li><a href="#home/all" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i> All Cards</a>{{#each Data }}
 		<li><a href="#home/{{id}}" class="pageLink" id="{{id}}"><i class="fa fa-file-text-o" aria-hidden="true"></i> {{name}}</a>
 
@@ -151,7 +153,7 @@
 				<p style="font-size:14px;" class="taskDes2"></p>
 				{{/if}}
 				<p id="taskText" class="taskText"></p>
-				<a href="{{url}}" class="taskLinks" style="font-size:14px;">view more</a>
+				<a href="{{url}}" class="taskLinks" style="font-size:14px;">View More</a>
 			</div>
 		</div>
 	</li>

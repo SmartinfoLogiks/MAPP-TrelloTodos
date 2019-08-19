@@ -43,9 +43,6 @@
 <script>
 	showLoader("#loader");
 	var finalarr = [];
-	var farr = [];
-	var arrs = [];
-	var async_request = [];
 	var cardTemplate = Handlebars.compile($("#card-list").html());
 
 	$(function() {
@@ -77,36 +74,6 @@
 					$("#dueDate").prop("checked", false);
 				}
 				listAllData();
-			} else if (pageID == "myday") {
-				$("#headerTexts").text("My Day");
-				$("#headerTextss").text("My Day");
-				$(".sortingBody").slideUp("slow");
-				$("#sortMethodText").html("Sort By <i class='fa fa-chevron-right' aria-hidden='true'></i>");
-				if ($("#alphabetical").prop("checked")) {
-					$("#alphabetical").prop("checked", false);
-				}
-				if ($("#alphabeticalza").prop("checked")) {
-					$("#alphabeticalza").prop("checked", false);
-				}
-				if ($("#dueDate").prop("checked")) {
-					$("#dueDate").prop("checked", false);
-				}
-				listMYDayData();
-			} else if (pageID == "me") {
-				$("#headerTexts").text("Task Assign To Me");
-				$("#headerTextss").text("Task Assign To Me");
-				$(".sortingBody").slideUp("slow");
-				$("#sortMethodText").html("Sort By <i class='fa fa-chevron-right' aria-hidden='true'></i>");
-				if ($("#alphabetical").prop("checked")) {
-					$("#alphabetical").prop("checked", false);
-				}
-				if ($("#alphabeticalza").prop("checked")) {
-					$("#alphabeticalza").prop("checked", false);
-				}
-				if ($("#dueDate").prop("checked")) {
-					$("#dueDate").prop("checked", false);
-				}
-				listTaskAssignToMe();
 			} else {
 				boardName = boardNameArr[boardIDArr.indexOf(pageID)];
 				$("#headerTexts").text(boardName);
@@ -174,6 +141,7 @@
 
 	function listAllData() {
 		showLoader("#loader");
+
 		for (i = 0; i < boardIDArr.length; i++) {
 			var key = appConfig.TRELLOAPIKEY;
 			var token = getUserSettings("USERKEY-TOKEN");
@@ -214,88 +182,6 @@
 		}
 	}
 
-	function listMYDayData() {
-		showLoader("#loader");
-		var key = appConfig.TRELLOAPIKEY;
-		var token = getUserSettings("USERKEY-TOKEN");
-		var userid = getUserSettings("USER_ID");
-		$.ajax({
-			url: "https://api.trello.com/1/members/" + userid + "/cards?filter=visible&key=" + key + "&token=" + token,
-			success: function(result) {
-				$.each(result, function(a, b) {
-					listid = result[a].idList;
-					boardid = result[a].idBoard;
-					async_request.push($.ajax({
-							url: "https://api.trello.com/1/lists/" + listid + "?fields=name%2Cclosed%2CidBoard%2Cpos&key=" + key + "&token=" + token,
-							success: function(results) {
-								result[a].colname = results.name;
-							}
-						}),
-						$.ajax({
-							url: "https://api.trello.com/1/boards/" + boardid + "?actions=name&fields=name%2Cclosed%2CidOrganization%2Cpinned%2Curl%2CshortUrl%2Cprefs%2ClabelNames&organization=false&key=" + key + "&token=" + token,
-							success: function(results1) {
-
-								result[a].bname = results1.name;
-							}
-						}));
-					arrs.push(result);
-				});
-				$.when.apply(null, async_request).done(function() {
-					console.log('all request completed');
-					finals = {
-						Data: arrs[0]
-					};
-					fa = finals.Data.filter(checkTodayDue);
-					final = {
-						Data: fa
-					};
-					var theCompiledHtml = cardTemplate(final);
-					$('#listcard').html(theCompiledHtml);
-					hideLoader("#loader");
-				});
-			}
-		});
-	}
-
-	function listTaskAssignToMe() {
-		showLoader("#loader");
-		var key = appConfig.TRELLOAPIKEY;
-		var token = getUserSettings("USERKEY-TOKEN");
-		var userid = getUserSettings("USER_ID");
-		$.ajax({
-			url: "https://api.trello.com/1/members/" + userid + "/cards?filter=visible&key=" + key + "&token=" + token,
-			success: function(result) {
-				$.each(result, function(a, b) {
-					listid = result[a].idList;
-					boardid = result[a].idBoard;
-					async_request.push($.ajax({
-							url: "https://api.trello.com/1/lists/" + listid + "?fields=name%2Cclosed%2CidBoard%2Cpos&key=" + key + "&token=" + token,
-							success: function(results) {
-								result[a].colname = results.name;
-							}
-						}),
-						$.ajax({
-							url: "https://api.trello.com/1/boards/" + boardid + "?actions=name&fields=name%2Cclosed%2CidOrganization%2Cpinned%2Curl%2CshortUrl%2Cprefs%2ClabelNames&organization=false&key=" + key + "&token=" + token,
-							success: function(results1) {
-
-								result[a].bname = results1.name;
-							}
-						}));
-					arrs.push(result);
-				});
-				$.when.apply(null, async_request).done(function() {
-					console.log('all request completed');
-					final = {
-						Data: arrs[0]
-					};
-					var theCompiledHtml = cardTemplate(final);
-					$('#listcard').html(theCompiledHtml);
-					hideLoader("#loader");
-				});
-			}
-		});
-	}
-
 	function SortByNameAsc(x, y) {
 		return ((x.name.toLowerCase() == y.name.toLowerCase()) ? 0 : ((x.name.toLowerCase() > y.name.toLowerCase()) ? 1 : -1));
 	}
@@ -310,19 +196,6 @@
 			dateB = new Date(y.due)
 		return dateB - dateA;
 	}
-
-	function checkTodayDue(d) {
-		var todaydate = new Date();
-		var tdd = todaydate.getDate();
-		var tyyyy = todaydate.getFullYear();
-		var tmon = todaydate.getMonth();
-		var td = tdd + "/" + tmon + "/" + tyyyy;
-		var dddd = new Date(d.due);
-		tdas = todaydate.setHours(0, 0, 0, 0);
-		ys = dddd.setHours(0, 0, 0, 0);
-		return tdas == ys
-	}
-
 
 	$('input[type=radio][name=tasksort]').change(function() {
 		$(".sortingBody").slideUp("slow");
@@ -345,4 +218,70 @@
 			$('#listcard').html(theCompiledHtml);
 		}
 	});
+
+	function listTaskAssignToMe() {
+		showLoader("#loader");
+		var key = appConfig.TRELLOAPIKEY;
+		var token = getUserSettings("USERKEY-TOKEN");
+		var userid = getUserSettings("USER_ID");
+		getData(key, token, userid, function(exists) {
+			showLoader("#loader");
+			farr.push(exists);
+			setTimeout(function() {
+				//showLoader("#loader");
+				var theCompiledHtml = cardTemplate(farr[0]);
+				$('#listcard').html(theCompiledHtml);
+				if (exists == null || exists == "") {
+					$("#nodata").removeClass('d-none');
+				}
+				//	hideLoader("#loader");
+			}, 3000);
+
+			hideLoader("#loader");
+		});
+
+	}
+
+	function getData(key, token, userid, callback) {
+		$.ajax({
+			url: "https://api.trello.com/1/members/" + userid + "/cards?filter=visible&key=" + key + "&token=" + token,
+			success: function(result) {
+
+				allcardarr = {
+					Data: result
+				};
+
+				$.each(allcardarr.Data, function(a, b) {
+					listid = allcardarr.Data[a].idList;
+					boardid = allcardarr.Data[a].idBoard;
+					console.log(boardid);
+					$.ajax({
+						url: "https://api.trello.com/1/lists/" + listid + "?fields=name%2Cclosed%2CidBoard%2Cpos&key=" + key + "&token=" + token,
+						success: function(results) {
+							console.log(results);
+							alllistarr = {
+								Data: results
+							};
+							allcardarr.Data[a].colname = alllistarr.Data.name;
+
+						}
+					});
+
+					$.ajax({
+						url: "https://api.trello.com/1/boards/" + boardid + "?actions=name&fields=name%2Cclosed%2CidOrganization%2Cpinned%2Curl%2CshortUrl%2Cprefs%2ClabelNames&organization=false&key=" + key + "&token=" + token,
+						success: function(results1) {
+							console.log(results1);
+							allboardarr = {
+								Data: results1
+							};
+							allcardarr.Data[a].bname = allboardarr.Data.name;
+
+						}
+					});
+
+				});
+				callback(allcardarr);
+			}
+		});
+	}
 </script>

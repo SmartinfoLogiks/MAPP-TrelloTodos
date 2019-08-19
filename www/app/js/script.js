@@ -179,6 +179,7 @@ function userProfile() {
 			$("#userpic").attr("src", avatarurl);
 			$("#fullname").text(result.fullName);
 			$("#email").text(result.email);
+			setUserSettings('USER_ID',result.email);
 	
 		},
 		error: function(result) {
