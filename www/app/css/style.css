@@ -166,7 +166,8 @@ body {
 	padding-top: 115px;
 	color: #fff;
 	padding-left: 32px;
-	font-size: 20px;
+	font-size: 30px;
+	font-size: 2.5em;
 }
 
 .darkHeader .bannerMain h3 {
@@ -708,8 +709,9 @@ body {
 	list-style: none;
 	padding-left: 0;
 	height: 80%;
-	height: calc(100% - 201px);
+	height: calc(100% - 50px);
 	overflow: auto;
+	padding-top: 85px;
 }
 
 .sideNav ul li a {
@@ -746,11 +748,11 @@ body {
 
 .sideNav .searchBox {
 	padding: 10px 20px;
-	position: sticky;
+	position: absolute;
 	right: 0;
 	top: 0;
 	left: 0;
-	background-image: linear-gradient(to right, #cd6583, #C07D47);
+	background-image: linear-gradient(to right, #ff2564, #ef7127);
 }
 
 .sideNav .form-group {
@@ -834,7 +836,7 @@ body {
 .darkHeader .topNav .navbar {
 	/*	background-color: #285fa5;*/
 	
-	background-image: linear-gradient(to right, #cd6583, #C07D47);
+	background-image: linear-gradient(to right, #ff2564, #ef7127);
 }
 
 .darkHeader .topNav .navbar .navbar-header .navbar-brand {
@@ -845,7 +847,7 @@ body {
 
 .bannerMain {
 	height: 170px;
-	background: url(../media/images/background2.jpg);
+	background: url(../media/images/background2.png);
 	background-size: cover;
 }
 
@@ -854,7 +856,7 @@ body {
 	padding-top: 115px;
 	color: #fff;
 	padding-left: 32px;
-	font-size: 20px;
+	font-size: 23px;
 }
 
 .darkHeader .bannerMain h3 {
@@ -879,7 +881,7 @@ body {
 }
 
 .contentArea .contentBox ul li {
-	padding: 0px 15px;
+	padding: 4px 15px;
 	border-bottom: 1px solid #ddd;
 	background: #fff;
 	margin-top: 4px;
@@ -1269,6 +1271,7 @@ body {
 	padding: 2px;
 	background: #fff;
 	border-radius: 100%;
+	float: left;
 }
 
 .sideNav .searchBox .fa {
@@ -1278,6 +1281,7 @@ body {
 .sideNav .searchBox .fullName {
 	font-size: 18px;
 	margin-top: 5px;
+	/*padding-left: 81px;*/
 }
 
 .taskLinks {
@@ -1523,10 +1527,13 @@ a.pageLink.card-link {
 }
 
 .logoutBtn {
-	position: fixed;
 	bottom: 0;
 	background: #fff;
-	width: 283px;
+	/* width: 283px; */
+	
+	position: absolute;
+	right: 0;
+	left: 0;
 }
 
 .logoutBtn a,
@@ -1586,3 +1593,23 @@ body.open .bannerMain {
 }
 
 .animatedSearch .toggleInput {}
+
+.menuActive {
+	background: #efefef;
+}
+
+.overlayBox {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: -250px;
+	width: 100%;
+}
+
+.sideNav.navOpen {
+	overflow: visible;
+}
+
+.sideNav.navClose {
+	left: -285px !important;
+}

@@ -6,6 +6,7 @@
 			-->
 			<div id="accordion">
 				<p id="nodata" class="d-none" style="text-align:center;padding:15px;">No Task On Your Board</p>
+				<!--	<p id="searchtext"></p>-->
 				<div id="loader"></div>
 				<div id="listcard"></div>
 			</div>
@@ -57,12 +58,16 @@
 	function loadTrelloCardData() {
 
 		hashArr = window.location.hash.split("/");
-		if (hashArr == null || hashArr.length <= 1) hashArr[1] = "all";
+		//if (hashArr == null || hashArr.length <= 1) hashArr[1] = "all";
+		if (hashArr == null || hashArr.length <= 1) hashArr[1] = "myday";
 
 		pageID = hashArr[1];
 
 		if (boardIDArr != null) {
 			if (pageID == "all") {
+
+				$("#listBoard > li >a.menuActive").removeClass("menuActive");
+				$("#" + pageID).addClass("menuActive");
 				$("#headerTexts").text("All Tasks");
 				$("#headerTextss").text("All Tasks");
 				$(".sortingBody").slideUp("slow");
@@ -78,6 +83,9 @@
 				}
 				listAllData();
 			} else if (pageID == "myday") {
+
+				$("#listBoard > li >a.menuActive").removeClass("menuActive");
+				$("#" + pageID).addClass("menuActive");
 				$("#headerTexts").text("My Day");
 				$("#headerTextss").text("My Day");
 				$(".sortingBody").slideUp("slow");
@@ -93,6 +101,8 @@
 				}
 				listMYDayData();
 			} else if (pageID == "me") {
+				$("#listBoard > li >a.menuActive").removeClass("menuActive");
+				$("#" + pageID).addClass("menuActive");
 				$("#headerTexts").text("Task Assign To Me");
 				$("#headerTextss").text("Task Assign To Me");
 				$(".sortingBody").slideUp("slow");
@@ -108,6 +118,8 @@
 				}
 				listTaskAssignToMe();
 			} else {
+				$("#listBoard > li >a.menuActive").removeClass("menuActive");
+				$("#" + pageID).addClass("menuActive");
 				boardName = boardNameArr[boardIDArr.indexOf(pageID)];
 				$("#headerTexts").text(boardName);
 				$("#headerTextss").text(boardName);
@@ -204,9 +216,14 @@
 						Data: finalarr
 					};
 
-					var theCompiledHtml = cardTemplate(final);
 
-					$('#listcard').html(theCompiledHtml);
+					if (final.Data == null || final.Data == "") {
+						$("#nodata").removeClass('d-none');
+					} else {
+						var theCompiledHtml = cardTemplate(final);
+
+						$('#listcard').html(theCompiledHtml);
+					}
 					hideLoader("#loader");
 				}
 			});
@@ -245,12 +262,31 @@
 					finals = {
 						Data: arrs[0]
 					};
-					fa = finals.Data.filter(checkTodayDue);
+
+					if (finals.Data == null || finals.Data == "" || finals.Data == undefined) {
+						$("#nodata").removeClass('d-none');
+					} else {
+						fa = finals.Data.filter(checkTodayDue);
+						final = {
+							Data: fa
+						};
+						if (final.Data == null || final.Data == "") {
+							$("#nodata").removeClass('d-none');
+
+						} else {
+							var theCompiledHtml = cardTemplate(final);
+							$('#listcard').html(theCompiledHtml);
+						}
+					}
+					/*fa = finals.Data.filter(checkTodayDue);
 					final = {
 						Data: fa
 					};
 					var theCompiledHtml = cardTemplate(final);
 					$('#listcard').html(theCompiledHtml);
+					if (fa == null || fa == "") {
+						$("#nodata").removeClass('d-none');
+					}*/
 					hideLoader("#loader");
 				});
 			}
@@ -290,6 +326,9 @@
 					};
 					var theCompiledHtml = cardTemplate(final);
 					$('#listcard').html(theCompiledHtml);
+					if (arrs[0] == null || arrs[0] == "") {
+						$("#nodata").removeClass('d-none');
+					}
 					hideLoader("#loader");
 				});
 			}

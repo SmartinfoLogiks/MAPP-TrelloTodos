@@ -232,14 +232,17 @@ function closBottom() {
 $(window).scroll(function() {
 	var scroll = $(window).scrollTop();
 
-	if (scroll >= 100) {
+	if (scroll >= 60) {
 		$("body").addClass("darkHeader");
 	} else {
 
 		$("body").removeClass("darkHeader");
 	}
 });
-
+$('.sidebarOverlay').click(function(e){
+	e.preventDefault();
+	closeNav();
+});
 /*function setboardName() {
 	var Boardname = getUserSettings("BOARD_NAME");
 	$("#headerTexts").text(Boardname);

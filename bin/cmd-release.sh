@@ -8,5 +8,5 @@ cordova build android --release
 
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore trelloTodos.keystore platforms/android/build/outputs/apk/release/android-release-unsigned.apk trelloTodos
 
-/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 platforms/android/build/outputs/apk/release/android-release-unsigned.apk ./dist/android-release.apk
+/opt/android-sdk-linux/build-tools/28.0.3/zipalign -v 4 platforms/android/build/outputs/apk/release/android-release-unsigned.apk ./dist/android-release.apk
 

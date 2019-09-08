@@ -6,22 +6,26 @@
 	<header>
 		<div id="mySidenav" class="sideNav">
 			<div class="searchBox">
-				<a class="sidebarHeading" href="#"></a>
 				<a href="javascript:void(0)" onclick="closeNav()" class="closebtn"><i class="fa fa-times" aria-hidden="true"></i></a>
-				<div class="form-group">
-					<img src="app/media/images/default-avatar.png" id="userpic" height="42" width="42">
-					<p id="fullname" class="fullName"></p>
-					<p id="email"></p>
-
+				<div class="form-group" style="height: 40px;">
+					<img src="app/media/images/default-avatar.png" id="userpic" height="42" width="42" style="margin-top: -7px;">
+					<!--	<div style="float: left;display: inline-block;margin-left: 8px;margin-top: -8px;">-->
+					<div style="padding-left: 70px;">
+						<p id="fullname" class="fullName"></p>
+						<p id="email" style="font-size: 11px;"></p>
+					</div>
 				</div>
 			</div>
 			<ul>
 				<div id="listBoard"></div>
 			</ul>
+
 			<div class="logoBox">
 				<img src="app/media/images/logo.png">
 			</div>
+			<div class="overlayBox">
 
+			</div>
 		</div>
 
 		<div class="topNav">
@@ -45,6 +49,7 @@
 				</div>
 			</nav>
 		</div>
+		<!--<div class="sidebarOverlay"></div>-->
 	</header>
 	<div class="bannerMain">
 		<h3 id="headerTexts" class="head">Header</h3>
@@ -102,10 +107,10 @@
 </div>
 
 <script id="board-list" type="text/x-handlebars-template">
-	<li><a href="#home/myday" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i>My Day</a></li>
-	<li><a href="#home/me" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i>Assign To Me</a></li>
-	<li><a href="#home/all" class="pageLink" id=""><i class="fa fa-file-text-o" aria-hidden="true"></i> All Cards</a>{{#each Data }}
-		<li><a href="#home/{{id}}" class="pageLink" id="{{id}}"><i class="fa fa-file-text-o" aria-hidden="true"></i> {{name}}</a>
+	<li><a href="#home/myday" class="pageLink" id="myday"><i class="fa fa-file-text-o" aria-hidden="true"></i>My Day</a></li>
+	<li><a href="#home/me" class="pageLink" id="me"><i class="fa fa-file-text-o" aria-hidden="true"></i>Assign To Me</a></li>
+	<li><a href="#home/all" class="pageLink" id="all"><i class="fa fa-file-text-o" aria-hidden="true"></i>All Cards</a>{{#each Data }}
+		<li><a href="#home/{{id}}" class="pageLink" id="{{id}}"><i class="fa fa-file-text-o" aria-hidden="true"></i>{{name}}</a>
 
 		</li>
 		{{/each}}
@@ -168,7 +173,11 @@
 	});
 	$(".closeIcon").click(function() {
 		$("body").removeClass("open");
+		$("#myInput").val("");
 
+		myFunction();
+
+		//$("#nodata").addClass("d-none");
 	});
 
 	function myFunction() {
@@ -183,9 +192,14 @@
 			txtValue = a.textContent || a.innerText;
 			dtxtValue = d.textContent || d.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1 || dtxtValue.toUpperCase().indexOf(filter) > -1) {
+				//$("#nodata").addClass("d-none");
 				li[i].style.display = "";
+				//$("#nodata").addClass("d-none");
 			} else {
 				li[i].style.display = "none";
+				//$("#searchtext").html("no search result found");
+				//$("#nodata").removeClass("d-none");
+
 			}
 		}
 	}
@@ -198,6 +212,25 @@
 		});
 		$(".sortingButtons .btn").click(function() {
 			$(".sortingBody").slideUp("slow");
+		});
+
+		$(".menuIcon .fa").click(function() {
+			$("#mySidenav").addClass("navOpen");
+			$("#mySidenav").removeClass("navClose");
+
+		});
+		$('.sideNav .closebtn').click(function(e) {
+
+			$("#mySidenav").removeClass("navOpen");
+			$("#mySidenav").addClass("navClose");
+
+
+		});
+		$('.overlayBox').click(function(e) {
+
+			$("#mySidenav").removeClass("navOpen");
+			$("#mySidenav").addClass("navClose");
+
 		});
 	});
 </script>
